@@ -27,9 +27,13 @@
         const ctx = canvas.getContext('2d');
 
         const snakeSize = 50;
-        let snakeSpeed = 15;
+        
+        let snakeSpeed = 5;
         let snakePositionX = 0;
         let snakePositionY = canvas.height / 2 - snakeSize / 2;
+
+        let velocityX = 1;
+        let velocityY = 0;
 
         function gameLoop()
         {
@@ -43,10 +47,23 @@
 
         function moveStuff()
         {
-            //snakePositionX += snakeSpeed;
+            snakePositionX += snakeSpeed * velocityX;
+            snakePositionY += snakeSpeed * velocityY;
 
             if (snakePositionX > canvas.width) {
                 snakePositionX = 0;
+            }
+
+            if (snakePositionX < -snakeSize) {
+                snakePositionX = canvas.width;
+            }
+
+            if (snakePositionY > canvas.height) {
+                snakePositionY = 0;
+            }
+
+            if (snakePositionY < -snakeSize) {
+                snakePositionY = canvas.height;
             }
         }
 
@@ -67,16 +84,28 @@
         {
             switch (event.key) {
                 case 'ArrowLeft':
-                    snakePositionX -= snakeSpeed;
+                    if (velocityX !== 1) {
+                        velocityX = -1;
+                        velocityY = 0;
+                    }
                     break;
                 case 'ArrowUp':
-                    snakePositionY -= snakeSpeed;
+                    if (velocityY !== 1) {
+                        velocityX = 0;
+                        velocityY = -1;
+                    }
                     break;
                 case 'ArrowRight':
-                    snakePositionX += snakeSpeed;
+                    if (velocityX !== -1) {
+                        velocityX = 1;
+                        velocityY = 0;
+                    }
                     break;
                 case 'ArrowDown':
-                    snakePositionY += snakeSpeed;
+                    if (velocityY !== -1) {
+                        velocityX = 0;
+                        velocityY = 1;
+                    }
                     break;
             }
         }
