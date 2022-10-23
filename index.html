@@ -28,12 +28,15 @@
 
         const snakeSize = 50;
         
-        let snakeSpeed = 5;
+        let snakeSpeed = 50;
         let snakePositionX = 0;
         let snakePositionY = canvas.height / 2 - snakeSize / 2;
 
         let velocityX = 1;
         let velocityY = 0;
+
+        const tileCountX = canvas.width / snakeSize;
+        const tileCountY = canvas.height / snakeSize;
 
         function gameLoop()
         {
@@ -69,7 +72,9 @@
 
         function drawStuff()
         {
-            rectangle('white', 0, 0, canvas.width, canvas.height);
+            rectangle('#ffbf00', 0, 0, canvas.width, canvas.height);
+
+            drawGrid();
 
             rectangle('black', snakePositionX, snakePositionY, snakeSize, snakeSize);
         }
@@ -107,6 +112,21 @@
                         velocityY = 1;
                     }
                     break;
+            }
+        }
+
+        drawGrid()
+        {
+            for (let i = 0; i < tileCountX; i++) {
+                for (let j = 0; j < tileCountY; j++) {
+                    rectangle(
+                        '#fff', 
+                        snakeSize * i, 
+                        snakeSize * j, 
+                        snakeSize - 1, 
+                        snakeSize - 1
+                    );
+                }
             }
         }
 
