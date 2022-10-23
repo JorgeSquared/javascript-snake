@@ -40,7 +40,7 @@
             drawStuff();
             moveStuff();
             
-            requestAnimationFrame(gameLoop);
+            setTimeout(gameLoop, 1000 / 15);
         }
 
         gameLoop();
