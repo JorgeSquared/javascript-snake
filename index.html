@@ -25,14 +25,28 @@
         const ctx = canvas.getContext('2d');
 
         const snakeSize = 50;
-        let snakePositionX = 30;
+        let snakeSpeed = 5;
+        let snakePositionX = 0;
         let snakePositionY = canvas.height / 2 - snakeSize / 2;
 
-        ctx.fillStyle = 'white';
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        function gameLoop()
+        {
+            ctx.fillStyle = 'white';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-        ctx.fillStyle = 'black';
-        ctx.fillRect(snakePositionX, snakePositionY, snakeSize, snakeSize);
+            snakePositionX += snakeSpeed;
+
+            if (snakePositionX > canvas.width) {
+                snakePositionX = 0;
+            }
+
+            ctx.fillStyle = 'black';
+            ctx.fillRect(snakePositionX, snakePositionY, snakeSize, snakeSize);
+            
+            requestAnimationFrame(gameLoop);
+        }
+
+        gameLoop();
     </script>
 </body>
 </html>
