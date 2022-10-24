@@ -35,8 +35,8 @@
         let velocityX = 1;
         let velocityY = 0;
 
-        let foodPositionX = 400;
-        let foodPositionY = 100;
+        let foodPositionX = 0;
+        let foodPositionY = 0;
 
         const tileCountX = canvas.width / snakeSize;
         const tileCountY = canvas.height / snakeSize;
@@ -46,9 +46,10 @@
             drawStuff();
             moveStuff();
             
-            setTimeout(gameLoop, 1000 / 15);
+            setTimeout(gameLoop, 1000 / 10);
         }
 
+        resetFood();
         gameLoop();
 
         function moveStuff()
@@ -75,7 +76,7 @@
 
             //food collision
             if (snakePositionX === foodPositionX && snakePositionY === foodPositionY) {
-                alert('YUMMI YUM');
+                resetFood();
             }
         }
 
@@ -94,6 +95,12 @@
         {
             ctx.fillStyle = color;
             ctx.fillRect(x, y, width, height);
+        }
+
+        function resetFood()
+        {
+            foodPositionX = Math.floor(Math.random() * tileCountX) * snakeSize;
+            foodPositionY = Math.floor(Math.random() * tileCountY) * snakeSize;
         }
 
         function keyPush(event)
