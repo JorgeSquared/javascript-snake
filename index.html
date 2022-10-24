@@ -28,9 +28,9 @@
 
         const snakeSize = 50;
         
-        let snakeSpeed = 50;
+        let snakeSpeed = snakeSize;
         let snakePositionX = 0;
-        let snakePositionY = canvas.height / 2 - snakeSize / 2;
+        let snakePositionY = canvas.height / 2;
 
         let velocityX = 1;
         let velocityY = 0;
@@ -53,15 +53,15 @@
             snakePositionX += snakeSpeed * velocityX;
             snakePositionY += snakeSpeed * velocityY;
 
-            if (snakePositionX > canvas.width) {
+            if (snakePositionX > canvas.width - snakeSize) {
                 snakePositionX = 0;
             }
 
-            if (snakePositionX < -snakeSize) {
+            if (snakePositionX < 0) {
                 snakePositionX = canvas.width;
             }
 
-            if (snakePositionY > canvas.height) {
+            if (snakePositionY > canvas.height - snakeSize) {
                 snakePositionY = 0;
             }
 
@@ -73,9 +73,7 @@
         function drawStuff()
         {
             rectangle('#ffbf00', 0, 0, canvas.width, canvas.height);
-
             drawGrid();
-
             rectangle('black', snakePositionX, snakePositionY, snakeSize, snakeSize);
         }
 
@@ -115,7 +113,7 @@
             }
         }
 
-        drawGrid()
+        function drawGrid()
         {
             for (let i = 0; i < tileCountX; i++) {
                 for (let j = 0; j < tileCountY; j++) {
